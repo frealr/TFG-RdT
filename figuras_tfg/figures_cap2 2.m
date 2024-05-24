@@ -1,0 +1,300 @@
+
+
+clear all; close all; clc;
+% En cada sección de este fichero se representan las figuras presentes
+% en el capítulo 2 de este TFG, ordenadas según aparecen en el documento.
+
+% El convenio para las dimensiones de las figuras será el siguiente:
+% - Tamaño de letra:
+% El código necesario es el siguiente:
+
+
+% - Formato de la ventana:
+% El código necesario es el siguiente
+
+% - Grosor de línea:
+% Cuando el grosor de línea no represente una magnitud en la figura,
+% el grosor por defecto será el siguiente: 
+
+% El código necesario es el siguiente
+
+% -Código de color:
+% El código necesario es el siguiente
+
+% -Formas de los puntos y tipos de línea:
+% El código necesario es el siguiente
+
+
+%% Figura 2.1. Representación red 9 nodos
+
+clear all; close all; clc;
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+n = 9; 
+map_x = [2,6,6,11,11,13,14,14,1];
+map_y = [4,6,2,6,2,4,1,7,1];
+
+distance = 10000 * ones(n, n); % Distances between arcs
+
+for i = 1:n
+    distance(i, i) = 0;
+end
+
+distance(1, 2) = 0.75;
+distance(1, 3) = 0.7;
+distance(1, 9) = 0.9;
+
+distance(2, 3) = 0.6;
+distance(2, 4) = 1.1;
+
+distance(3, 4) = 1.1;
+distance(3, 5) = 0.5;
+distance(3, 9) = 0.7;
+
+distance(4,5) = 0.8;
+distance(4,6) = 0.7;
+distance(4,8) = 0.8;
+
+distance(5,6) = 0.5;
+distance(5,7) = 0.7;
+
+distance(6,7) = 0.5;
+distance(6,8) = 0.4;
+
+for i = 1:n
+    for j = i+1:n
+        distance(j, i) = distance(i, j); % Distances are symmetric
+    end
+end
+
+candidates = {[2,3,9],[1,3,4],[9,1,2,4,5],[2,3,5,6,8],[3,4,6,7],[4,5,7,8],[5,6],[4,6],[1,3]};
+%    1 2 3 4 5 6 7 8 9
+a = [0,1,1,0,0,0,0,0,1;...
+     1,0,1,1,0,0,0,0,0;...
+     1,1,0,1,1,0,0,0,1;...
+     0,1,1,0,1,1,0,1,0;...
+     0,0,1,1,0,1,1,0,0;...
+     0,0,0,1,1,0,1,1,0;...
+     0,0,0,0,1,1,0,0,0;...
+     0,0,0,1,0,1,0,0,0;...
+     1,0,1,0,0,0,0,0,0];
+a(9,3) = 5;
+a(5,7) = 3;
+a(2,3) = 3;
+a(3,5) = 5;
+a(5,6) = 5;
+a(6,8) = 5;
+a = (a + a')./2;
+
+g = graph(a);
+
+figure('Position', [100, 100, 450, 300]);
+
+h = plot(g,'XData',map_x,'YData',map_y,'LineWidth',2*g.Edges.Weight,'NodeFontSize',12,...
+    'EdgeColor','#0072BD','EdgeAlpha',0.8,'MarkerSize',8);
+xticks([]); yticks([]); %Para no representar los ejes
+axis off;
+
+for i = 1:9
+    for j = i+1:9
+        if a(i,j) ~= 0 % Si hay un arco entre los nodos i y j
+            % Calcular las coordenadas del texto (en el medio del arco)
+            tx = (map_x(i) + map_x(j)) / 2 + 0.5;
+            ty = (map_y(i) + map_y(j)) / 2 + 0.2;
+            % Mostrar el valor del arco encima del arco
+            text(tx, ty, ['d = ',num2str(distance(i,j))], 'FontSize', 8, 'Color', 'black', 'HorizontalAlignment', 'center');
+            text(tx, ty-0.4, ['a = ',num2str(a(i,j))], 'FontSize', 8, 'Color', 'black', 'HorizontalAlignment', 'center');
+        end
+    end
+end
+saveas(gcf, '9node_network.png'); % Guardar la figura en formato PNG
+
+
+
+
+
+
+%% Figura 2.2. Linealización función logística
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+close all; clc;
+d_ext = 5;
+paso = 0.01;
+x = 0.01:paso:d_ext*2;
+logit = logit_share(x,d_ext);
+logit_lin = zeros(1,length(x));
+
+n_trozos = 5;
+figure('Position', [100, 100, 450, 300]);
+for i=1:(n_trozos)
+    x1 = x((length(x)/n_trozos)*(i-1)+ 1);
+    x2 = x(min((length(x)/n_trozos)*i + 1,length(x)));
+    if (i < n_trozos)
+        plot([x2 x2],[1 0],':','Color','#7E2F8E','LineWidth',1.2);
+        hold on;
+    end
+    %x1 = x(((1/paso)./n_trozos -1).*(1/paso)*(i-1)+1);
+    %x2 = x(((1/paso)./n_trozos - 1).*(1/paso)*i+1);
+    y1 = logit_share(x1,d_ext);
+    y2 = logit_share(x2,d_ext);
+    m = (y2-y1)./(x2-x1);
+    disp(['x1 = ',num2str(x1),', x2=',num2str(x2)]);
+    x_prim = x1:paso:x2;
+    logit_lin(round((1/paso).*x_prim)) = m.*(x_prim-x1)+y1;
+end
+
+
+plot(x,logit,'LineWidth',1.5,'Color','#0072BD');
+hold on;
+plot(x,logit_lin,'--','LineWidth',1.5,'Color','#D95319');
+xticks([0,0.5*d_ext,d_ext,1.5*d_ext,d_ext*2]);
+xticklabels({'$x=0$','$x=0.5x_{ext}^{od}$','$x=x_{ext}^{od}$','$x=1.5x_{ext}^{od}$','$x=2x_{ext}^{od}$'});
+grid minor;
+h = gca; % Obtener el handle del eje actual
+legend(h.Children(1:2), '$\hat{f}(x)$', '$f(x)$','FontSize',12,'Interpreter','latex');
+
+ylabel('$f(x),\hat{f}(x)$','Interpreter','latex');
+
+set(gca, 'FontSize', 12);
+set(gca, 'TickLabelInterpreter', 'latex');
+saveas(gcf, 'piecewise_linear.png'); % Guardar la figura en formato PNG
+
+%% Figura 2.3. Representación de alfa*log(beta*x + eps) para alfa y beta
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+close all;
+
+% alfa 1, beta 10
+% alfa 1, beta 100
+% alfa 0.2, beta 10
+% alfa 0.2, beta 100
+
+eps = 1e-3;
+alfas = [0.2,0.5];
+betas = [10,100];
+x = 0:0.01:10;
+y = zeros(length(x),length(alfas),length(betas));
+figure('Position', [100, 100, 450, 300]);
+for aa=1:length(alfas)
+    alfa = alfas(aa);
+    for bb=1:length(betas)
+        beta = betas(bb);
+        y(:,aa,bb) = alfa.*log(beta.*x + eps);
+    end
+end
+plot(x,y(:,1,1),'-','LineWidth',1.5);
+hold on;
+
+plot(x,y(:,1,2),'--','LineWidth',1.5,'Color','#EDB120');
+hold on;
+
+plot(x,y(:,2,1),':','LineWidth',1.5,'Color','#D95319');
+hold on;
+
+plot(x,y(:,2,2),'-.','LineWidth',1.5);
+hold on;
+
+
+ylim([0 5]);
+grid on;
+
+legend('$\alpha = 0.2, \beta = 10$', '$\alpha = 0.2, \beta = 100$','$\alpha = 0.5, \beta = 10$', ...
+    '$\alpha = 0.5, \beta = 100$ ','FontSize',12,'Interpreter','latex','Location','northwest');
+
+ylabel('$\alpha log(\beta |x| + \varepsilon)$','Interpreter','latex');
+xlabel('$x$', 'Interpreter','latex');
+
+set(gca, 'FontSize', 12);
+set(gca, 'TickLabelInterpreter', 'latex');
+saveas(gcf, 'log_norm0.png'); % Guardar la figura en formato PNG
+
+
+%% Figura 2.4. Comparación norma l0, l1 y log
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+close all;
+
+x = 0:0.01:5;
+l1 = x;
+l0 = x > 0;
+alfa = 0.2; beta = 100; eps = 1e-3;
+rwl1 = alfa.*log(beta.*x + eps);
+figure('Position', [100, 100, 450, 300]);
+plot(x,l0,'-','LineWidth',1.5);
+hold on;
+plot(x,l1,':','LineWidth',1.5);
+hold on;
+plot(x,rwl1,'--','LineWidth',1.5);
+ylim([0 5]);
+grid on;
+legend('$\ell_0(x)$ ', ...
+    '$\ell_1(x)$', ...
+    '$\ell_{1_{rw}}(x) = \alpha \log(\beta |x| + \varepsilon)$', ...
+    'FontSize',12,'Interpreter','latex','Location','northwest');
+
+xlabel('$x$', 'Interpreter','latex');
+set(gca, 'FontSize', 12);
+set(gca, 'TickLabelInterpreter', 'latex');
+saveas(gcf, 'norms_comparison.png'); % Guardar la figura en formato PNG
+
+%% Figura 2.5. Comparación norma l0, l1 y log
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+close all;
+
+x = 0:0.01:5;
+y = alfa.*log(beta.*x + eps);
+x1 = 0.05; x1_vec = x1-1:0.01:x1+1;
+y1 = alfa.*log(beta.*x1 + eps) + alfa*beta.*(x1_vec-x1)./(beta*x1+eps);
+x2 = 0.5; x2_vec = x2-1:0.01:x2+1;
+y2 = alfa.*log(beta.*x2 + eps) + alfa*beta.*(x2_vec-x2)./(beta*x2+eps);
+x3 = 1.5; x3_vec = x3-1:0.01:x3+1;
+y3 = alfa.*log(beta.*x3 + eps) + alfa*beta.*(x3_vec-x3)/(beta*x3+eps);
+
+figure('Position', [100, 100, 450, 300]);
+plot(x,y,'LineWidth',1.5); hold on;
+plot(x1_vec,y1,'--','LineWidth',1.5); hold on;
+plot(x2_vec,y2,'--','LineWidth',1.5); hold on;
+plot(x3_vec,y3,'--','LineWidth',1.5); hold on;
+grid on;
+ylim([0 3]); xlim([0 5]);
+h = gca; % Obtener el handle del eje actual
+c = '#D95319';
+scatter(x1,alfa.*log(beta.*x1 + eps),'MarkerFaceColor','#D95319','MarkerEdgeColor','#D95319');
+scatter(x2,alfa.*log(beta.*x2 + eps),'MarkerFaceColor','#EDB120','MarkerEdgeColor','#EDB120');
+scatter(x3,alfa.*log(beta.*x3 + eps),'MarkerFaceColor','#7E2F8E','MarkerEdgeColor','#7E2F8E');
+
+legend('$\ell_{1_{rw}}(x)$' , ...
+    '$\hat{\ell}_{1_{rw}}^k(x|x^{k-1}=0.05)$', ...
+    '$\hat{\ell}_{1_{rw}}^k(x|x^{k-1}=0.5)$', ...
+    '$\hat{\ell}_{1_{rw}}^k(x|x^{k-1}=1.5)$'...
+    ,'FontSize',12,'Interpreter','latex');
+xlabel('$x$', 'Interpreter','latex');
+set(gca, 'FontSize', 12);
+set(gca, 'TickLabelInterpreter', 'latex');
+saveas(gcf, 'log_MM.png'); % Guardar la figura en formato PNG
+
+
+
+
+%% Funciones
+
+% Función logística
+function logit = logit_share(x,d_ext)
+    logit = exp(-x)./(exp(-d_ext)+exp(-x));
+end
