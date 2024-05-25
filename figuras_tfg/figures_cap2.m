@@ -159,11 +159,11 @@ xticks([0,0.5*d_ext,d_ext,1.5*d_ext,d_ext*2]);
 xticklabels({'$x=0$','$x=0.5x_{ext}^{od}$','$x=x_{ext}^{od}$','$x=1.5x_{ext}^{od}$','$x=2x_{ext}^{od}$'});
 grid minor;
 h = gca; % Obtener el handle del eje actual
-legend(h.Children(1:2), '$\hat{f}(x)$', '$f(x)$','FontSize',12,'Interpreter','latex');
+legend(h.Children(1:2), '$\hat{f}(x)$', '$f(x)$','FontSize',9,'Interpreter','latex');
 
 ylabel('$f(x),\hat{f}(x)$','Interpreter','latex');
 
-set(gca, 'FontSize', 12);
+set(gca, 'FontSize', 9);
 set(gca, 'TickLabelInterpreter', 'latex');
 saveas(gcf, 'piecewise_linear.png'); % Guardar la figura en formato PNG
 
@@ -210,12 +210,12 @@ ylim([0 5]);
 grid on;
 
 legend('$\alpha = 0.2, \beta = 10$', '$\alpha = 0.2, \beta = 100$','$\alpha = 0.5, \beta = 10$', ...
-    '$\alpha = 0.5, \beta = 100$ ','FontSize',12,'Interpreter','latex','Location','northwest');
+    '$\alpha = 0.5, \beta = 100$ ','FontSize',9,'Interpreter','latex','Location','northwest');
 
 ylabel('$\alpha log(\beta |x| + \varepsilon)$','Interpreter','latex');
 xlabel('$x$', 'Interpreter','latex');
 
-set(gca, 'FontSize', 12);
+set(gca, 'FontSize', 9);
 set(gca, 'TickLabelInterpreter', 'latex');
 saveas(gcf, 'log_norm0.png'); % Guardar la figura en formato PNG
 
@@ -244,10 +244,10 @@ grid on;
 legend('$\ell_0(x)$ ', ...
     '$\ell_1(x)$', ...
     '$\ell_{1_{rw}}(x) = \alpha \log(\beta |x| + \varepsilon)$', ...
-    'FontSize',12,'Interpreter','latex','Location','northwest');
+    'FontSize',9,'Interpreter','latex','Location','northwest');
 
 xlabel('$x$', 'Interpreter','latex');
-set(gca, 'FontSize', 12);
+set(gca, 'FontSize', 9);
 set(gca, 'TickLabelInterpreter', 'latex');
 saveas(gcf, 'norms_comparison.png'); % Guardar la figura en formato PNG
 
@@ -285,9 +285,9 @@ legend('$\ell_{1_{rw}}(x)$' , ...
     '$\hat{\ell}_{1_{rw}}^k(x|x^{k-1}=0.05)$', ...
     '$\hat{\ell}_{1_{rw}}^k(x|x^{k-1}=0.5)$', ...
     '$\hat{\ell}_{1_{rw}}^k(x|x^{k-1}=1.5)$'...
-    ,'FontSize',12,'Interpreter','latex');
+    ,'FontSize',9,'Interpreter','latex');
 xlabel('$x$', 'Interpreter','latex');
-set(gca, 'FontSize', 12);
+set(gca, 'FontSize', 9);
 set(gca, 'TickLabelInterpreter', 'latex');
 saveas(gcf, 'log_MM.png'); % Guardar la figura en formato PNG
 

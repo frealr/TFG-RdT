@@ -117,7 +117,7 @@ for bb=1:length(betas)
     d_med(bb) = sum(sum(dis))/(sum(sum(f.*demand)));
     u_med(bb) = sum(sum(uu))/(sum(sum(fext.*demand)));
     disp(['gamma = ',num2str(1/beta_or)]);
-    disp(['Dem att. = ',num2str(100*sum(sum(f.*demand))/sum(sum(demand))),' %']);
+    disp(['D.A. = ',num2str(100*sum(sum(f.*demand))/sum(sum(demand))),' %']);
     att_dem = round(100*sum(sum(f.*demand))/sum(sum(demand)),1);
    % disp(['att_dem = ',num2str(sum(sum(f.*demand))),' pax']);
     disp(['Pres. = ',num2str(budget)]);
@@ -146,13 +146,13 @@ figure('Position', [100, 100, 450, 300]);
 subplot(211);
 plot(bud,att_d,'-o','LineWidth',1.5); grid on; yl = ylabel('Demanda atraida [\%]','Interpreter','latex');
 xl = xlabel('Presupuesto [EUR]','interpreter','latex');
-set(gca, 'FontSize', 12);
+set(gca, 'FontSize', 9);
 set(gca, 'TickLabelInterpreter', 'latex');
 
 subplot(212);
 plot(1./betas,att_d,'-o','LineWidth',1.5); grid on; xl = xlabel('$\gamma$','Interpreter','latex');
 yl = ylabel('Demanda atraida [\%]','Interpreter','latex');
-set(gca, 'FontSize', 12);
+set(gca, 'FontSize', 9);
 set(gca, 'TickLabelInterpreter', 'latex');
 saveas(gcf, './figures/sevilla_dem_pres_lam10_original.png'); % Guardar la figura en formato PNG
 
@@ -166,10 +166,10 @@ subplot(221);
 plot(1./betas,d_med,'-o','LineWidth',1.5); 
 hold on
 plot(1./betas,u_med,'-o','LineWidth',1.5); grid on; 
-xl = xlabel('$\gamma$','Interpreter','latex','FontSize',12); 
-yl = ylabel('$\bar{d}_{PAX}$','Interpreter','latex','FontSize',12);
-legend('Red nueva','Red competidora','Interpreter','latex','Location','best','FontSize',12);
-set(gca, 'FontSize', 12);
+xl = xlabel('$\gamma$','Interpreter','latex','FontSize',9); 
+yl = ylabel('$\bar{d}_{PAX}$','Interpreter','latex','FontSize',9);
+legend('Red nueva','Red competidora','Interpreter','latex','Location','best','FontSize',9);
+set(gca, 'FontSize', 9);
 set(gca, 'TickLabelInterpreter', 'latex');
 
 
@@ -177,25 +177,25 @@ subplot(223);
 plot(1./betas,d_med,'-o','LineWidth',1.5); 
 hold on
 plot(1./betas,u_med,'-o','LineWidth',1.5); grid on; 
-xl = xlabel('$\gamma$','Interpreter','latex','FontSize',12); 
-yl = ylabel('$\bar{d}_{PAX}$','Interpreter','latex','FontSize',12);
+xl = xlabel('$\gamma$','Interpreter','latex','FontSize',9); 
+yl = ylabel('$\bar{d}_{PAX}$','Interpreter','latex','FontSize',9);
 xlim([4 8.5]);
-legend('Red nueva','Red competidora','Interpreter','latex','Location','best','FontSize',12 );
-set(gca, 'FontSize', 12);
+legend('Red nueva','Red competidora','Interpreter','latex','Location','best','FontSize',9 );
+set(gca, 'FontSize', 9);
 set(gca, 'TickLabelInterpreter', 'latex');
 
 
 subplot(222);
-plot(1./betas,long_mean,'-o','LineWidth',1.5); grid on; xl = xlabel('$\gamma$','Interpreter','latex','FontSize',12); 
-yl = ylabel('$\bar{d}_{ruta}$','Interpreter','latex','FontSize',12);
+plot(1./betas,long_mean,'-o','LineWidth',1.5); grid on; xl = xlabel('$\gamma$','Interpreter','latex','FontSize',9); 
+yl = ylabel('$\bar{d}_{ruta}$','Interpreter','latex','FontSize',9);
 
 subplot(224);
 plot(1./betas,long_mean,'-o','LineWidth',1.5); grid on; 
-xl = xlabel('$\gamma$','Interpreter','latex','FontSize',12);
-yl = ylabel('$\bar{d}_{ruta}$','Interpreter','latex','FontSize',12);
+xl = xlabel('$\gamma$','Interpreter','latex','FontSize',9);
+yl = ylabel('$\bar{d}_{ruta}$','Interpreter','latex','FontSize',9);
 xlim([4 8.5]);
 
-set(gca, 'FontSize', 12);
+set(gca, 'FontSize', 9);
 set(gca, 'TickLabelInterpreter', 'latex');
 
 saveas(gcf, './figures/sevilla_mean_timeroute_lam10_original.png'); % Guardar la figura en formato PNG
@@ -260,7 +260,7 @@ for bb=1:length(betas)
     xticks([]); yticks([]); 
     axis off; % Desactivar los ejes
     colorbar('TickLabelInterpreter','latex');
-    set(gca, 'FontSize', 12);
+    set(gca, 'FontSize', 9);
     set(gca, 'TickLabelInterpreter', 'latex');
 
     [n,link_cost,station_cost,link_capacity_slope,...
@@ -270,7 +270,7 @@ for bb=1:length(betas)
         a_max,candidates] = parameters_sevilla_network();
     gam = 1./beta_or;
     att_d = 100*sum(sum(f.*demand))/sum(sum(demand));
-    tit = ['$\gamma = ',num2str(round(gam,1)),'$, $\lambda = 10$, Dem. $ = ',num2str(round(att_d,1)),' \% $'];
+    tit = ['$\gamma = ',num2str(round(gam,1)),'$, $\lambda = 10$, D.A. $ = ',num2str(round(att_d,1)),' \% $'];
     title(tit,'Interpreter','latex');
 
 end
@@ -347,7 +347,7 @@ for ii=1:3
     xticks([]); yticks([]); 
     axis off; % Desactivar los ejes
     colorbar('TickLabelInterpreter','latex');
-    set(gca, 'FontSize', 12);
+    set(gca, 'FontSize', 9);
     set(gca, 'TickLabelInterpreter', 'latex');
     
     [n,link_cost,station_cost,link_capacity_slope,...
@@ -357,7 +357,7 @@ for ii=1:3
         a_max,candidates] = parameters_sevilla_network();
     gam = 1./beta_or;
     att_d = 100*sum(sum(f.*demand))/sum(sum(demand));
-    tit = ['$\gamma = ',num2str(round(gam,1)),'$, $\lambda = ', num2str(lam),'$, Dem. $ = ',num2str(round(att_d,1)),' \% $'];
+    tit = ['$\gamma = ',num2str(round(gam,1)),'$, $\lambda = ', num2str(lam),'$, D.A. $ = ',num2str(round(att_d,1)),' \% $'];
     title(tit,'Interpreter','latex');
 end
 
@@ -417,7 +417,7 @@ uistack(h,'bottom');
 set(h,'AlphaData',0.8);
 xticks([]); yticks([]); 
 axis off; % Desactivar los ejes
-set(gca, 'FontSize', 12);
+set(gca, 'FontSize', 9);
 set(gca, 'TickLabelInterpreter', 'latex');
 
 
@@ -488,7 +488,7 @@ for ii=1:2
     xticks([]); yticks([]); 
     axis off; % Desactivar los ejes
     colorbar('TickLabelInterpreter','latex');
-    set(gca, 'FontSize', 12);
+    set(gca, 'FontSize', 9);
     set(gca, 'TickLabelInterpreter', 'latex');
     
     [n,link_cost,station_cost,link_capacity_slope,...
@@ -498,7 +498,7 @@ for ii=1:2
         a_max,candidates] = parameters_sevilla_network();
     gam = 1./beta_or;
     att_d = 100*sum(sum(f.*demand))/sum(sum(demand));
-    tit = ['$\gamma = ',num2str(round(gam,1)),'$, $\lambda = ', num2str(lam),'$, Dem. $ = ',num2str(round(att_d,1)),' \% $'];
+    tit = ['$\gamma = ',num2str(round(gam,1)),'$, $\lambda = ', num2str(lam),'$, D.A. $ = ',num2str(round(att_d,1)),' \% $'];
     title(tit,'Interpreter','latex');
 end
 
@@ -549,7 +549,7 @@ uistack(h,'bottom');
 set(h,'AlphaData',0.8);
 xticks([]); yticks([]); 
 axis off; % Desactivar los ejes
-set(gca, 'FontSize', 12);
+set(gca, 'FontSize', 9);
 set(gca, 'TickLabelInterpreter', 'latex');
 
 
@@ -618,7 +618,7 @@ for ii=1:2
     xticks([]); yticks([]); 
     axis off; % Desactivar los ejes
     colorbar('TickLabelInterpreter','latex');
-    set(gca, 'FontSize', 12);
+    set(gca, 'FontSize', 9);
     set(gca, 'TickLabelInterpreter', 'latex');
     
     [n,link_cost,station_cost,link_capacity_slope,...
@@ -628,7 +628,7 @@ for ii=1:2
         a_max,candidates] = parameters_sevilla_network();
     gam = 1./beta_or;
     att_d = 100*sum(sum(f.*demand))/sum(sum(demand));
-    tit = ['$\gamma = ',num2str(round(gam,1)),'$, $\lambda = ', num2str(lam),'$, Dem. $ = ',num2str(round(att_d,1)),' \% $'];
+    tit = ['$\gamma = ',num2str(round(gam,1)),'$, $\lambda = ', num2str(lam),'$, D.A. $ = ',num2str(round(att_d,1)),' \% $'];
     title(tit,'Interpreter','latex');
 end
 

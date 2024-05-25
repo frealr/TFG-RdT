@@ -393,9 +393,8 @@ ylabel('[%] de vuelos totales');
 %yl = ylabel('% de vuelos de conexión')
  ax.XTickLabelRotation = 60;
  ax.FontSize = 12;
-
-%%
-for nodo=1:25
+%% 
+for nodo=1:n
     total_nodo =  sum(sum(squeeze(permute(sum(fij(:,nodo,:,:),1),[3,4,1,2])).*demand));
     nohubs_nodo =  sum(sum(squeeze(permute(sum(fij(:,nodo,[1:3,5:11,13:16,18:21,23:25],:),1),[3,4,1,2])).*demand([1:3,5:11,13:16,18:21,23:25],:)));
     prop_nohubs(nodo) = nohubs_nodo/total_nodo;
@@ -732,7 +731,7 @@ function [n,link_cost,station_cost,...
     coor_x = table2array(CAB_data(1:25,1));
     coor_y = table2array(CAB_data(1:25,2));
     demand = table2array(CAB_data(26:50,1:25));
-    demand = 1.11214.*demand.*(4/30);
+    demand = 1.1214.*demand.*(4/30);
  %   midwest = [5,8,9,15,21];
   %  demand(midwest,midwest) = 5*demand(midwest,midwest);
     distance = zeros(n);

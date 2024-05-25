@@ -44,7 +44,7 @@ grid minor;
 ylabel('$t(F_{ij}|A_{ij})$ [min]','Interpreter','latex');
 xticks([0,0.25*a,0.5*a,0.75*a,a]);
 xticklabels({'$F_{ij}=0$','$F_{ij}=0.25A_{ij}$','$F_{ij}=0.5A_{ij}$','$F_{ij}=0.75A_{ij}$','$F_{ij}=A_{ij}$'});
-set(gca, 'FontSize', 12);
+set(gca, 'FontSize', 9);
 set(gca, 'TickLabelInterpreter', 'latex');
 saveas(gcf, 'congestion.png'); % Guardar la figura en formato PNG
 
@@ -68,7 +68,7 @@ ylabel('$t(F_{ij}|A_{ij})$ [min]','Interpreter','latex');
 xticks([0,2.5,5,7.5,10]);
 xticklabels({'$A_{ij}-F_{ij}=10$','$A_{ij}-F_{ij}=7.5$', ...
     '$A_{ij}-F_{ij}=5$','$A_{ij}-F_{ij}=2.5$','$A_{ij}-F_{ij}=0$'});
-set(gca, 'FontSize', 12);
+set(gca, 'FontSize', 9);
 set(gca, 'TickLabelInterpreter', 'latex');
 saveas(gcf, 'congestion_absoluto.png'); % Guardar la figura en formato PNG
 
@@ -270,9 +270,9 @@ for pp = 5:7
     grid on;
   %  lg = legend(leg,'Location','northwest');
     lg = legend('','$\lambda = 5$, $\beta = 1.25$','','$\lambda = 6$, $\beta = 1.25$','$\lambda = 5$, $\beta = 1.5$','Interpreter','latex','Location','best');
-    lg.FontSize = 12;
+    lg.FontSize = 9;
 
-    set(gca, 'FontSize', 12);
+    set(gca, 'FontSize', 9);
     set(gca, 'TickLabelInterpreter', 'latex');
 
 
@@ -330,7 +330,7 @@ figure('Position', [100, 100, 450, 300]);
 plot(obs_pax,obs_op,'-o','LineWidth',1.5);
 xlim([0 1]); ylim([0 1]);
 grid on; xlabel('$PAX$ (normalizado)','interpreter','latex'); ylabel('$OP$ (normalizado)','interpreter','latex');
-set(gca, 'FontSize', 12);
+set(gca, 'FontSize', 9);
 set(gca, 'TickLabelInterpreter', 'latex');
 saveas(gcf, 'pareto_utopia.png'); % Guardar la figura en formato PNG
 
@@ -420,10 +420,10 @@ tit = title('1. Arcos construidos vs $\beta$ para diferentes $\lambda$','interpr
 lg = legend('$\lambda = 5$','$\lambda = 5$ MIP','$\lambda = 6$','$\lambda = 6$ MIP','Location','best','interpreter','latex');
 
 
-tit.FontSize = 12;
-set(gca, 'FontSize', 12);
+tit.FontSize = 9;
+set(gca, 'FontSize', 9);
 set(gca, 'TickLabelInterpreter', 'latex');
-lg.FontSize = 12;
+lg.FontSize = 9;
 
 subplot(222);
 color = {'blue','red'};
@@ -440,10 +440,10 @@ tit = title('2. Demanda absorbida vs $\beta$ para diferentes $\lambda$','interpr
 lg = legend('$\lambda = 5$','$\lambda = 5$ MIP','$\lambda = 6$','$\lambda = 6$ MIP','Location','best','interpreter','latex');
 
 
-tit.FontSize = 12;
-set(gca, 'FontSize', 12);
+tit.FontSize = 9;
+set(gca, 'FontSize', 9);
 set(gca, 'TickLabelInterpreter', 'latex');
-lg.FontSize = 12;
+lg.FontSize = 9;
 
 
 subplot(223);
@@ -463,10 +463,10 @@ lg = legend('$\lambda = 5$','$\lambda = 5$ MIP','$\lambda = 6$','$\lambda = 6$ M
 obj_gap = (obj_val_relax - obj_val_MIP)./obj_val_MIP;
 
 
-tit.FontSize = 12;
-set(gca, 'FontSize', 12);
+tit.FontSize = 9;
+set(gca, 'FontSize', 9);
 set(gca, 'TickLabelInterpreter', 'latex');
-lg.FontSize = 12;
+lg.FontSize = 9;
 
 
 subplot(224);
@@ -483,10 +483,10 @@ xl = xlabel('$\beta$','interpreter','latex'); yl = ylabel('tiempo [s]','interpre
 tit = title('4. Tiempo de computo [s] vs $\beta$ para diferentes $\lambda$', 'interpreter','latex');
 lg = legend('$\lambda = 5$','$\lambda = 5$ MIP','$\lambda = 6$','$\lambda = 6$ MIP','Location','northeast','interpreter','latex');
 
-tit.FontSize = 12;
-set(gca, 'FontSize', 12);
+tit.FontSize = 9;
+set(gca, 'FontSize', 9);
 set(gca, 'TickLabelInterpreter', 'latex');
-lg.FontSize = 12;
+lg.FontSize = 9;
 
 saveas(gcf, 'comparativa_MIP.png'); % Guardar la figura en formato PNG
 
@@ -494,12 +494,6 @@ saveas(gcf, 'comparativa_MIP.png'); % Guardar la figura en formato PNG
 
 
 %% Tabla comparativa algoritmos
-
-
-betas = [1.5];
-lams = [5];
-
-
  
 budgets = zeros(length(betas),length(lams));
 budgets_MIP = budgets;
@@ -570,10 +564,10 @@ tit = title('1. Arcos construidos vs $\beta$ para diferentes $\lambda$','interpr
 lg = legend('$\lambda = 5$','$\lambda = 5$ MIP','$\lambda = 6$','$\lambda = 6$ MIP','Location','best','interpreter','latex');
 
 
-tit.FontSize = 12;
-set(gca, 'FontSize', 12);
+tit.FontSize = 9;
+set(gca, 'FontSize', 9);
 set(gca, 'TickLabelInterpreter', 'latex');
-lg.FontSize = 12;
+lg.FontSize = 9;
 
 subplot(222);
 color = {'blue','red'};
@@ -590,10 +584,10 @@ tit = title('2. Demanda absorbida vs $\beta$ para diferentes $\lambda$','interpr
 lg = legend('$\lambda = 5$','$\lambda = 5$ MIP','$\lambda = 6$','$\lambda = 6$ MIP','Location','best','interpreter','latex');
 
 
-tit.FontSize = 12;
-set(gca, 'FontSize', 12);
+tit.FontSize = 9;
+set(gca, 'FontSize', 9);
 set(gca, 'TickLabelInterpreter', 'latex');
-lg.FontSize = 12;
+lg.FontSize = 9;
 
 
 subplot(223);
@@ -613,10 +607,10 @@ lg = legend('$\lambda = 5$','$\lambda = 5$ MIP','$\lambda = 6$','$\lambda = 6$ M
 obj_gap = (obj_val_relax - obj_val_MIP)./obj_val_MIP;
 
 
-tit.FontSize = 12;
-set(gca, 'FontSize', 12);
+tit.FontSize = 9;
+set(gca, 'FontSize', 9);
 set(gca, 'TickLabelInterpreter', 'latex');
-lg.FontSize = 12;
+lg.FontSize = 9;
 
 
 subplot(224);
@@ -633,10 +627,10 @@ xl = xlabel('$\beta$','interpreter','latex'); yl = ylabel('tiempo [s]','interpre
 tit = title('4. Tiempo de computo [s] vs $\beta$ para diferentes $\lambda$', 'interpreter','latex');
 lg = legend('$\lambda = 5$','$\lambda = 5$ MIP','$\lambda = 6$','$\lambda = 6$ MIP','Location','northeast','interpreter','latex');
 
-tit.FontSize = 12;
-set(gca, 'FontSize', 12);
+tit.FontSize = 9;
+set(gca, 'FontSize', 9);
 set(gca, 'TickLabelInterpreter', 'latex');
-lg.FontSize = 12;
+lg.FontSize = 9;
 
 %% Funciones
 
