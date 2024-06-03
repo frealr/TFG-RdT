@@ -41,9 +41,13 @@ figure('Position', [100, 100, 450, 300]);
 plot(x,t,'LineWidth',1.5);
 ylim([0 20]);
 grid minor;
-ylabel('$t(F_{ij}|A_{ij})$ [min]','Interpreter','latex');
+ylabel('$t_{ij}^c$ [min]','Interpreter','latex');
 xticks([0,0.25*a,0.5*a,0.75*a,a]);
-xticklabels({'$F_{ij}=0$','$F_{ij}=0.25A_{ij}$','$F_{ij}=0.5A_{ij}$','$F_{ij}=0.75A_{ij}$','$F_{ij}=A_{ij}$'});
+xticklabels({'$\sum_{\forall(o,d) \in \mathcal{K}}F_{ij}^{od}=0$', ...
+    '$\sum_{\forall(o,d) \in \mathcal{K}}F_{ij}^{od}=0.25A_{ij}$', ...
+    '$\sum_{\forall(o,d) \in \mathcal{K}}F_{ij}^{od}=0.5A_{ij}$', ...
+    '$\sum_{\forall(o,d) \in \mathcal{K}}F_{ij}^{od}=0.75A_{ij}$', ...
+    '$\sum_{\forall(o,d) \in \mathcal{K}}F_{ij}^{od}=A_{ij}$'});
 set(gca, 'FontSize', 9);
 set(gca, 'TickLabelInterpreter', 'latex');
 saveas(gcf, 'congestion.png'); % Guardar la figura en formato PNG
@@ -64,10 +68,13 @@ figure('Position', [100, 100, 450, 300]);
 plot(x,t,'LineWidth',1.5);
 ylim([0 20]);
 grid minor;
-ylabel('$t(F_{ij}|A_{ij})$ [min]','Interpreter','latex');
+ylabel('$t_{ij}^c$ [min]','Interpreter','latex');
 xticks([0,2.5,5,7.5,10]);
-xticklabels({'$A_{ij}-F_{ij}=10$','$A_{ij}-F_{ij}=7.5$', ...
-    '$A_{ij}-F_{ij}=5$','$A_{ij}-F_{ij}=2.5$','$A_{ij}-F_{ij}=0$'});
+xticklabels({'$A_{ij}-\sum_{\forall(o,d) \in \mathcal{K}}F_{ij}^{od}=10$', ...
+    '$A_{ij}-\sum_{\forall(o,d) \in \mathcal{K}}F_{ij}^{od}=7.5$', ...
+    '$A_{ij}-\sum_{\forall(o,d) \in \mathcal{K}}F_{ij}^{od}=5$', ...
+    '$A_{ij}-\sum_{\forall(o,d) \in \mathcal{K}}F_{ij}^{od}=2.5$', ...
+    '$A_{ij}-\sum_{\forall(o,d) \in \mathcal{K}}F_{ij}^{od}=0$'});
 set(gca, 'FontSize', 9);
 set(gca, 'TickLabelInterpreter', 'latex');
 saveas(gcf, 'congestion_absoluto.png'); % Guardar la figura en formato PNG

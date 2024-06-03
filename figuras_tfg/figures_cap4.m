@@ -144,14 +144,15 @@ close all;
 figure('Position', [100, 100, 450, 300]);
 
 subplot(211);
-plot(bud,att_d,'-o','LineWidth',1.5); grid on; yl = ylabel('Demanda atraida [\%]','Interpreter','latex');
-xl = xlabel('Presupuesto [EUR]','interpreter','latex');
+plot(bud,att_d,'-o','LineWidth',1.5); grid on; yl = ylabel('D.A. [\%]','Interpreter','latex');
+eur =['[',char(8364),']'];
+xl = xlabel(['Pres. [EUR]'],'interpreter','latex');
 set(gca, 'FontSize', 9);
 set(gca, 'TickLabelInterpreter', 'latex');
 
 subplot(212);
 plot(1./betas,att_d,'-o','LineWidth',1.5); grid on; xl = xlabel('$\gamma$','Interpreter','latex');
-yl = ylabel('Demanda atraida [\%]','Interpreter','latex');
+yl = ylabel('D.A. [\%]','Interpreter','latex');
 set(gca, 'FontSize', 9);
 set(gca, 'TickLabelInterpreter', 'latex');
 saveas(gcf, './figures/sevilla_dem_pres_lam10_original.png'); % Guardar la figura en formato PNG
@@ -163,36 +164,39 @@ close all;
 figure('Position', [100, 100, 450, 300]);
 
 subplot(221);
-plot(1./betas,d_med,'-o','LineWidth',1.5); 
+plot(1./betas,2.*d_med,'-o','LineWidth',1.5); 
 hold on
-plot(1./betas,u_med,'-o','LineWidth',1.5); grid on; 
+plot(1./betas,2.*u_med,'-o','LineWidth',1.5); grid on; 
 xl = xlabel('$\gamma$','Interpreter','latex','FontSize',9); 
-yl = ylabel('$\bar{d}_{PAX}$','Interpreter','latex','FontSize',9);
+yl = ylabel('$\bar{t}_{PAX}$ [min]','Interpreter','latex','FontSize',9);
 legend('Red nueva','Red competidora','Interpreter','latex','Location','best','FontSize',9);
 set(gca, 'FontSize', 9);
 set(gca, 'TickLabelInterpreter', 'latex');
 
+subplot(222);
+plot(1./betas,2.*long_mean,'-o','LineWidth',1.5); grid on; xl = xlabel('$\gamma$','Interpreter','latex','FontSize',9); 
+yl = ylabel('$\bar{t}_{ruta}$ [min]','Interpreter','latex','FontSize',9);
+set(gca, 'FontSize', 9);
+set(gca, 'TickLabelInterpreter', 'latex');
 
 subplot(223);
-plot(1./betas,d_med,'-o','LineWidth',1.5); 
+plot(1./betas,2.*d_med,'-o','LineWidth',1.5); 
 hold on
-plot(1./betas,u_med,'-o','LineWidth',1.5); grid on; 
+plot(1./betas,2.*u_med,'-o','LineWidth',1.5); grid on; 
 xl = xlabel('$\gamma$','Interpreter','latex','FontSize',9); 
-yl = ylabel('$\bar{d}_{PAX}$','Interpreter','latex','FontSize',9);
+yl = ylabel('$\bar{t}_{PAX}$ [min]','Interpreter','latex','FontSize',9);
 xlim([4 8.5]);
 legend('Red nueva','Red competidora','Interpreter','latex','Location','best','FontSize',9 );
 set(gca, 'FontSize', 9);
 set(gca, 'TickLabelInterpreter', 'latex');
 
 
-subplot(222);
-plot(1./betas,long_mean,'-o','LineWidth',1.5); grid on; xl = xlabel('$\gamma$','Interpreter','latex','FontSize',9); 
-yl = ylabel('$\bar{d}_{ruta}$','Interpreter','latex','FontSize',9);
+
 
 subplot(224);
-plot(1./betas,long_mean,'-o','LineWidth',1.5); grid on; 
+plot(1./betas,2.*long_mean,'-o','LineWidth',1.5); grid on; 
 xl = xlabel('$\gamma$','Interpreter','latex','FontSize',9);
-yl = ylabel('$\bar{d}_{ruta}$','Interpreter','latex','FontSize',9);
+yl = ylabel('$\bar{t}_{ruta}$ [min]','Interpreter','latex','FontSize',9);
 xlim([4 8.5]);
 
 set(gca, 'FontSize', 9);

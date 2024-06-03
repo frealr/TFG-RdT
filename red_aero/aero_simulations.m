@@ -141,8 +141,7 @@ betas = [4:0.1:4.7,5];
 betas = [5,7,10];
 betas = [5,7,10];
 
-betas = [7];
-lams = [10];
+
 
 
 %slim, lam 5. beta = 3.6
@@ -253,8 +252,10 @@ for bb=1:length(betas)
         gastos = sum(sum(op_link_cost.*a));
         beneficios = ingresos - gastos;
         disp(['beneficios= ',num2str(beneficios)]);
-        disp(['RASK = ',num2str(mean(mean(rev/ask)))]);
-        disp(['CASK = ',num2str(mean(mean(cask_num/cask_den)))]);
+        disp(['RASK = ',num2str(sum(sum(rev))/sum(sum(ask)) )]);
+        %disp(['RASK = ',num2str(mean(mean(rev/ask)))]);
+        disp(['CASK = ',num2str( sum(sum(cask_num))/sum(sum(cask_den)) )]);
+        %disp(['CASK = ',num2str(mean(mean(cask_num/cask_den)))]);
         disp(['tiempo = ',num2str(comp_time)]);
         
 
